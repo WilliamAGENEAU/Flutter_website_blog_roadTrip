@@ -11,40 +11,100 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Icon(Icons.abc),
+        elevation: 4.0, // Ajout de l'élévation
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: Container(
+            color: Colors.grey,
+            height: 0.3, // Ligne de séparation
+          ),
+        ),
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'Destinations',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'Van',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'À propos',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'Projets',
-              style: Theme.of(context).textTheme.bodyLarge,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SizedBox(
+              width: 190,
+              child: ExpansionTile(
+                title: Text(
+                  'Destinations',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Option 1'),
+                  ),
+                ],
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SizedBox(
+              width: 120,
+              child: ExpansionTile(
+                title: Text(
+                  'Van',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Option 1'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SizedBox(
+              width: 150,
+              child: ExpansionTile(
+                title: Text(
+                  'À propos',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Option 1'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SizedBox(
+              width: 150,
+              child: ExpansionTile(
+                title: Text(
+                  'Projets',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Option 1'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: ElevatedButton(
               onPressed: () {},
-              child: const Text('Contact'),
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.primaryContainer),
+                padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 24.0)), // Augmentation de la taille
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0), // Forme moins arrondie
+                  ),
+                ),
+              ),
+              child: Text(
+                'Contact',
+                style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
+              ),
             ),
           ),
           Switch(
@@ -90,8 +150,17 @@ class HomePage extends StatelessWidget {
                             onPressed: () {},
                             style: ButtonStyle(
                               backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
+                              padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 24.0)), // Augmentation de la taille
+                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0), // Forme moins arrondie
+                                ),
+                              ),
                             ),
-                            child:  Text('Voir l\'itinéraire', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
+                            child: Text(
+                              'Voir l\'itinéraire',
+                              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                            ),
                           ),
                         ],
                       ),
