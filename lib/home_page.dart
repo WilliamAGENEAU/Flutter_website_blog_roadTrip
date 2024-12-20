@@ -11,16 +11,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Icon(Icons.abc),
-        elevation: 4.0, // Ajout de l'élévation
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
-          child: Container(
-            color: Colors.grey,
-            height: 0.3, // Ligne de séparation
-          ),
-        ),
+        
         actions: [
-          Padding(
+           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SizedBox(
               width: 190,
@@ -40,10 +33,10 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SizedBox(
-              width: 120,
+              width: 150,
               child: ExpansionTile(
                 title: Text(
-                  'Van',
+                  'À propos',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 children: <Widget>[
@@ -54,13 +47,14 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+         
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SizedBox(
-              width: 150,
+              width: 120,
               child: ExpansionTile(
                 title: Text(
-                  'À propos',
+                  'Van',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 children: <Widget>[
