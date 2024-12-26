@@ -63,6 +63,36 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/homepage.png
+    - assets/flags/albanie.png
+    - assets/flags/allemagne.png
+    - assets/flags/autriche.png
+    - assets/flags/bosnie.png
+    - assets/flags/bulgarie.png
+    - assets/flags/croatie.png
+    - assets/flags/france.png
+    - assets/flags/grece.png
+    - assets/flags/hongrie.png
+    - assets/flags/italie.png
+    - assets/flags/macedoine.png
+    - assets/flags/montenegro.png
+    - assets/flags/roumanie.png
+    - assets/flags/slovenie.png
+    - assets/flags/suisse.png
+    - assets/maps/albanie_map.png
+    - assets/maps/allemagne_map.png
+    - assets/maps/autriche_map.png
+    - assets/maps/bosnie_map.png
+    - assets/maps/bulgarie_map.png
+    - assets/maps/croatie_map.png
+    - assets/maps/france_map.png
+    - assets/maps/grece_map.png
+    - assets/maps/hongrie_map.png
+    - assets/maps/italie_map.png
+    - assets/maps/macedoine_map.png
+    - assets/maps/montenegro_map.png
+    - assets/maps/roumanie_map.png
+    - assets/maps/slovenie_map.png
+    - assets/maps/suisse_map.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
