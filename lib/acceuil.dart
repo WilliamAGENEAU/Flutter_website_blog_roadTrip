@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Acceuil extends StatelessWidget {
-  const Acceuil({super.key});
+  final VoidCallback scrollToDestinations;
+
+  const Acceuil({super.key, required this.scrollToDestinations});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class Acceuil extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: scrollToDestinations,
                           style: ButtonStyle(
                             backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
                             padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 24.0)),

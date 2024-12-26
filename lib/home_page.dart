@@ -46,10 +46,13 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           TextButton.icon(
-            icon: Icon(Icons.home, color: _selectedIndex == 0 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.home, color: _selectedIndex == 0 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'Accueil',
-              style: TextStyle(color: _selectedIndex == 0 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 0 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 0 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -59,10 +62,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           TextButton.icon(
-            icon: Icon(Icons.location_on, color: _selectedIndex == 1 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.location_on, color: _selectedIndex == 1 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'Destinations',
-              style: TextStyle(color: _selectedIndex == 1 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 1 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 1 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -72,10 +78,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           TextButton.icon(
-            icon: Icon(Icons.info, color: _selectedIndex == 2 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.info, color: _selectedIndex == 2 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'À propos',
-              style: TextStyle(color: _selectedIndex == 2 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 2 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 2 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -85,10 +94,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           TextButton.icon(
-            icon: Icon(Icons.directions_car, color: _selectedIndex == 3 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.directions_car, color: _selectedIndex == 3 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'Van',
-              style: TextStyle(color: _selectedIndex == 3 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 3 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 3 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -98,10 +110,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           TextButton.icon(
-            icon: Icon(Icons.work, color: _selectedIndex == 4 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.work, color: _selectedIndex == 4 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'Projets',
-              style: TextStyle(color: _selectedIndex == 4 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 4 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 4 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -111,10 +126,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           TextButton.icon(
-            icon: Icon(Icons.map, color: _selectedIndex == 5 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.map, color: _selectedIndex == 5 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'Pays',
-              style: TextStyle(color: _selectedIndex == 5 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 5 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 5 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -124,10 +142,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           TextButton.icon(
-            icon: Icon(Icons.contact_mail, color: _selectedIndex == 6 ? Colors.blue : Colors.white),
+            icon: Icon(Icons.contact_mail, color: _selectedIndex == 6 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
             label: Text(
               'Contact',
-              style: TextStyle(color: _selectedIndex == 6 ? Colors.blue : Colors.white),
+              style: TextStyle(color: _selectedIndex == 6 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: _selectedIndex == 6 ? Theme.of(context).colorScheme.primary : null,
             ),
             onPressed: () {
               setState(() {
@@ -164,7 +185,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             SizedBox(
               height: screenHeight,
-              child: const Acceuil(),
+              child: Acceuil(
+                scrollToDestinations: () => _scrollToIndex(1), 
+              ),
             ),
             SizedBox(
               height: screenHeight,
