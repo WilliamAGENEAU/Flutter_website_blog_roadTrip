@@ -10,6 +10,7 @@ class CountryDialog extends StatefulWidget {
   final String langue;
   final String camping;
   final String vignette;
+  final Function(String, String, String) onUpdate;
 
   const CountryDialog({
     super.key,
@@ -21,6 +22,7 @@ class CountryDialog extends StatefulWidget {
     required this.langue,
     required this.camping,
     required this.vignette,
+    required this.onUpdate,
   });
 
   @override
@@ -113,11 +115,11 @@ class _CountryDialogState extends State<CountryDialog> {
                                     style: Theme.of(context).textTheme.headlineSmall,
                                   ),
                                   const SizedBox(height: 8),
-                                  _buildTextField("Capitale", capitaleController),
-                                  _buildTextField("Monnaie", monnaieController),
-                                  _buildTextField("Langue", langueController),
-                                  _buildTextField("Camping sauvage", campingController),
-                                  _buildTextField("Vignette et autoroute", vignetteController),
+                                  _buildTextField("Capitale", capitaleController, 'capitale'),
+                                  _buildTextField("Monnaie", monnaieController, 'monnaie'),
+                                  _buildTextField("Langue", langueController, 'langue'),
+                                  _buildTextField("Camping sauvage", campingController, 'camping'),
+                                  _buildTextField("Vignette et autoroute", vignetteController, 'vignette'),
                                   // Ajoutez d'autres informations ici
                                 ],
                               ),
@@ -213,7 +215,7 @@ class _CountryDialogState extends State<CountryDialog> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller) {
+  Widget _buildTextField(String label, TextEditingController controller, String key) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: TextField(
@@ -224,6 +226,9 @@ class _CountryDialogState extends State<CountryDialog> {
           ),
         ),
         controller: controller,
+        onChanged: (value) {
+          widget.onUpdate(widget.country, key, value);
+        },
       ),
     );
   }
