@@ -37,6 +37,9 @@ dependencies:
   provider: ^6.1.2
   flutter_staggered_animations: ^1.1.1
   shared_preferences: ^2.3.4
+  google_maps_flutter: ^2.10.0
+  google_maps_flutter_web: ^0.5.10
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -72,13 +75,13 @@ flutter:
     - assets/flags/bulgarie.png
     - assets/flags/croatie.png
     - assets/flags/france.png
-    - assets/flags/grèce.png
+    - assets/flags/grece.png
     - assets/flags/hongrie.png
     - assets/flags/italie.png
     - assets/flags/macedoine_du_nord.png
-    - assets/flags/monténégro.png
+    - assets/flags/montenegro.png
     - assets/flags/roumanie.png
-    - assets/flags/slovénie.png
+    - assets/flags/slovenie.png
     - assets/flags/suisse.png
     - assets/maps/albanie_map.png
     - assets/maps/allemagne_map.png
@@ -87,13 +90,13 @@ flutter:
     - assets/maps/bulgarie_map.png
     - assets/maps/croatie_map.png
     - assets/maps/france_map.png
-    - assets/maps/grèce_map.png
+    - assets/maps/grece_map.png
     - assets/maps/hongrie_map.png
     - assets/maps/italie_map.png
     - assets/maps/macedoine_du_nord_map.png
-    - assets/maps/monténégro_map.png
+    - assets/maps/montenegro_map.png
     - assets/maps/roumanie_map.png
-    - assets/maps/slovénie_map.png
+    - assets/maps/slovenie_map.png
     - assets/maps/suisse_map.png
     
 

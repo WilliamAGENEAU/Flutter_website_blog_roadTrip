@@ -49,7 +49,7 @@ class _PaysState extends State<Pays> {
           'monnaie': prefs.getString('Bosnie_Herzegovine_monnaie') ?? 'Mark convertible (BAM)',
           'langue': prefs.getString('Bosnie_Herzegovine_langue') ?? 'Bosnien',
           'camping': prefs.getString('Bosnie_Herzegovine_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Bosnie_Herzegovine_vignette') ?? 'Non requis',
+          'vignette': prefs.getString('Bosni_eHerzegovine_vignette') ?? 'Non requis',
         },
         'Bulgarie': {
           'capitale': prefs.getString('Bulgarie_capitale') ?? 'Sofia',
@@ -93,12 +93,12 @@ class _PaysState extends State<Pays> {
           'camping': prefs.getString('Italie_camping') ?? 'Autorise',
           'vignette': prefs.getString('Italie_vignette') ?? 'Requis',
         },
-        'Macedoine du Nord': {
-          'capitale': prefs.getString('Macedoine_du_Nord_capitale') ?? 'Skopje',
-          'monnaie': prefs.getString('Macedoine_du_Nord_monnaie') ?? 'Denar (MKD)',
-          'langue': prefs.getString('Macedoine_du_Nord_langue') ?? 'Macedonien',
-          'camping': prefs.getString('Macedoine_du_Nord_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Macedoine_du_Nord_vignette') ?? 'Non requis',
+        'Macedoine Du Nord': {
+          'capitale': prefs.getString('Macedoine_Du_Nord_capitale') ?? 'Skopje',
+          'monnaie': prefs.getString('Macedoine_Du_Nord_monnaie') ?? 'Denar (MKD)',
+          'langue': prefs.getString('Macedoine_Du_Nord_langue') ?? 'Macedonien',
+          'camping': prefs.getString('Macedoine_Du_Nord_camping') ?? 'Autorise',
+          'vignette': prefs.getString('Macedoine_Du_Nord_vignette') ?? 'Non requis',
         },
         'Montenegro': {
           'capitale': prefs.getString('Montenegro_capitale') ?? 'Podgorica',
@@ -174,10 +174,9 @@ class _PaysState extends State<Pays> {
                       countryInfo[country]!['langue']!,
                       countryInfo[country]!['camping']!,
                       countryInfo[country]!['vignette']!,
-                                        );
-                    
+                    );
                   }).toList(),
-                                  ),
+                ),
               ),
             );
           },

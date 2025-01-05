@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Icon(Icons.abc),
+        
         elevation: 2, // Ajout de l'élévation
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(4.0),
