@@ -22,8 +22,13 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   void _scrollToIndex(int index) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    if (screenHeight == 0) {
+      return;
+    }
+
     _scrollController.animateTo(
-      index * MediaQuery.of(context).size.height, // Utiliser la hauteur de l'écran
+      index * screenHeight,
       duration: Duration(milliseconds: 500),
       curve: Curves.ease,
     );
@@ -32,6 +37,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    if (screenHeight == 0) {
+      return const Center(child: Text('Error: Invalid screen height'));
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -45,128 +53,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          TextButton.icon(
-            icon: Icon(Icons.home, color: _selectedIndex == 0 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'Accueil',
-              style: TextStyle(color: _selectedIndex == 0 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 0 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 0;
-              });
-              _scrollToIndex(0);
-            },
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.location_on, color: _selectedIndex == 1 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'Destinations',
-              style: TextStyle(color: _selectedIndex == 1 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 1 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 1;
-              });
-              _scrollToIndex(1);
-            },
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.info, color: _selectedIndex == 2 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'À propos',
-              style: TextStyle(color: _selectedIndex == 2 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 2 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 2;
-              });
-              _scrollToIndex(2);
-            },
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.directions_car, color: _selectedIndex == 3 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'Van',
-              style: TextStyle(color: _selectedIndex == 3 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 3 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 3;
-              });
-              _scrollToIndex(3);
-            },
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.work, color: _selectedIndex == 4 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'Projets',
-              style: TextStyle(color: _selectedIndex == 4 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 4 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 4;
-              });
-              _scrollToIndex(4);
-            },
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.map, color: _selectedIndex == 5 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'Pays',
-              style: TextStyle(color: _selectedIndex == 5 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 5 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 5;
-              });
-              _scrollToIndex(5);
-            },
-          ),
-          TextButton.icon(
-            icon: Icon(Icons.contact_mail, color: _selectedIndex == 6 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            label: Text(
-              'Contact',
-              style: TextStyle(color: _selectedIndex == 6 ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: _selectedIndex == 6 ? Theme.of(context).colorScheme.primary : null,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = 6;
-              });
-              _scrollToIndex(6);
-            },
-          ),
+          // Actions raccourcies pour simplifier le code
+          _buildNavigationButton(0, 'Accueil', Icons.home),
+          _buildNavigationButton(1, 'Destinations', Icons.location_on),
+          _buildNavigationButton(2, 'À propos', Icons.info),
+          _buildNavigationButton(3, 'Van', Icons.directions_car),
+          _buildNavigationButton(4, 'Projets', Icons.work),
+          _buildNavigationButton(5, 'Pays', Icons.map),
+          _buildNavigationButton(6, 'Contact', Icons.contact_mail),
           Switch(
             value: widget.isDarkMode,
             activeColor: Theme.of(context).colorScheme.primary,
             onChanged: widget.toggleTheme,
-            thumbIcon: WidgetStateProperty.resolveWith<Icon?>((states) {
-              if (states.contains(WidgetState.selected)) {
-                return const Icon(Icons.nightlight_round, color: Colors.white);
-              }
-              return const Icon(Icons.wb_sunny, color: Colors.white);
-            }),
           ),
         ],
       ),
@@ -174,6 +72,7 @@ class _HomePageState extends State<HomePage> {
         onNotification: (ScrollNotification scrollInfo) {
           if (scrollInfo is ScrollEndNotification) {
             int index = (_scrollController.offset / screenHeight).round();
+            print('Scroll ended at index: $index'); // Debug print
             setState(() {
               _selectedIndex = index;
             });
@@ -183,39 +82,49 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           controller: _scrollController,
           children: [
-            SizedBox(
-              height: screenHeight,
-              child: Acceuil(
-                scrollToDestinations: () => _scrollToIndex(1), 
-              ),
-            ),
-            SizedBox(
-              height: screenHeight,
-              child: const Destinations(),
-            ),
-            SizedBox(
-              height: screenHeight,
-              child: const Apropos(),
-            ),
-            SizedBox(
-              height: screenHeight,
-              child: const Van(),
-            ),
-            SizedBox(
-              height: screenHeight,
-              child: const Projets(),
-            ),
-            SizedBox(
-              height: screenHeight,
-              child: const Pays(),
-            ),
-            SizedBox(
-              height: screenHeight,
-              child: const Contact(),
-            ),
+            if (screenHeight > 0) ...[
+              SizedBox(height: screenHeight, child: Acceuil(scrollToDestinations: () => _scrollToIndex(1))),
+              SizedBox(height: screenHeight, child: const Destinations()),
+              SizedBox(height: screenHeight, child: const Apropos()),
+              SizedBox(height: screenHeight, child: const Van()),
+              SizedBox(height: screenHeight, child: const Projets()),
+              SizedBox(height: screenHeight, child: const Pays()),
+              SizedBox(height: screenHeight, child: const Contact()),
+            ] else
+              Center(child: Text('Error: Invalid screen height')),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildNavigationButton(int index, String label, IconData icon) {
+    return TextButton.icon(
+      icon: Icon(
+        icon,
+        color: _selectedIndex == index
+            ? Theme.of(context).colorScheme.onPrimary
+            : Theme.of(context).colorScheme.onSurface,
+      ),
+      label: Text(
+        label,
+        style: TextStyle(
+          color: _selectedIndex == index
+              ? Theme.of(context).colorScheme.onPrimary
+              : Theme.of(context).colorScheme.onSurface,
+        ),
+      ),
+      style: TextButton.styleFrom(
+        backgroundColor: _selectedIndex == index
+            ? Theme.of(context).colorScheme.primary
+            : null,
+      ),
+      onPressed: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+        _scrollToIndex(index);
+      },
     );
   }
 }
