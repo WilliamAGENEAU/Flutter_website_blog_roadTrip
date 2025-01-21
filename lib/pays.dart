@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dialog.dart';
 
 class Pays extends StatefulWidget {
   const Pays({super.key});
@@ -19,125 +17,116 @@ class _PaysState extends State<Pays> {
     _loadCountryInfo();
   }
 
-  Future<void> _loadCountryInfo() async {
-    final prefs = await SharedPreferences.getInstance();
+  void _loadCountryInfo() {
     setState(() {
       countryInfo = {
         'Albanie': {
-          'capitale': prefs.getString('Albanie_capitale') ?? 'Tirana',
-          'monnaie': prefs.getString('Albanie_monnaie') ?? 'Lek (ALL)',
-          'langue': prefs.getString('Albanie_langue') ?? 'Albanais',
-          'camping': prefs.getString('Albanie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Albanie_vignette') ?? 'Non requis',
+          'capitale': 'Tirana',
+          'monnaie': 'Lek (ALL)',
+          'langue': 'Albanais',
+          'camping': 'Autorise',
+          'vignette': 'Non requis',
         },
         'Allemagne': {
-          'capitale': prefs.getString('Allemagne_capitale') ?? 'Berlin',
-          'monnaie': prefs.getString('Allemagne_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('Allemagne_langue') ?? 'Allemand',
-          'camping': prefs.getString('Allemagne_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Allemagne_vignette') ?? 'Requis',
+          'capitale': 'Berlin',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Allemand',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Autriche': {
-          'capitale': prefs.getString('Autriche_capitale') ?? 'Vienne',
-          'monnaie': prefs.getString('Autriche_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('Autriche_langue') ?? 'Allemand',
-          'camping': prefs.getString('Autriche_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Autriche_vignette') ?? 'Requis',
+          'capitale': 'Vienne',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Allemand',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Bosnie-Herzegovine': {
-          'capitale': prefs.getString('Bosnie_Herzegovine_capitale') ?? 'Sarajevo',
-          'monnaie': prefs.getString('Bosnie_Herzegovine_monnaie') ?? 'Mark convertible (BAM)',
-          'langue': prefs.getString('Bosnie_Herzegovine_langue') ?? 'Bosnien',
-          'camping': prefs.getString('Bosnie_Herzegovine_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Bosnie_Herzegovine_vignette') ?? 'Non requis',
+          'capitale': 'Sarajevo',
+          'monnaie': 'Mark convertible (BAM)',
+          'langue': 'Bosnien',
+          'camping': 'Autorise',
+          'vignette': 'Non requis',
         },
         'Bulgarie': {
-          'capitale': prefs.getString('Bulgarie_capitale') ?? 'Sofia',
-          'monnaie': prefs.getString('Bulgarie_monnaie') ?? 'Lev (BGN)',
-          'langue': prefs.getString('Bulgarie_langue') ?? 'Bulgare',
-          'camping': prefs.getString('Bulgarie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Bulgarie_vignette') ?? 'Requis',
+          'capitale': 'Sofia',
+          'monnaie': 'Lev (BGN)',
+          'langue': 'Bulgare',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Croatie': {
-          'capitale': prefs.getString('Croatie_capitale') ?? 'Zagreb',
-          'monnaie': prefs.getString('Croatie_monnaie') ?? 'Kuna (HRK)',
-          'langue': prefs.getString('Croatie_langue') ?? 'Croate',
-          'camping': prefs.getString('Croatie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Croatie_vignette') ?? 'Requis',
+          'capitale': 'Zagreb',
+          'monnaie': 'Kuna (HRK)',
+          'langue': 'Croate',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'France': {
-          'capitale': prefs.getString('France_capitale') ?? 'Paris',
-          'monnaie': prefs.getString('France_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('France_langue') ?? 'Francais',
-          'camping': prefs.getString('France_camping') ?? 'Autorise',
-          'vignette': prefs.getString('France_vignette') ?? 'Requis',
+          'capitale': 'Paris',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Francais',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Grece': {
-          'capitale': prefs.getString('Grece_capitale') ?? 'Athenes',
-          'monnaie': prefs.getString('Grece_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('Grece_langue') ?? 'Grec',
-          'camping': prefs.getString('Grece_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Grece_vignette') ?? 'Requis',
+          'capitale': 'Athenes',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Grec',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Hongrie': {
-          'capitale': prefs.getString('Hongrie_capitale') ?? 'Budapest',
-          'monnaie': prefs.getString('Hongrie_monnaie') ?? 'Forint (HUF)',
-          'langue': prefs.getString('Hongrie_langue') ?? 'Hongrois',
-          'camping': prefs.getString('Hongrie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Hongrie_vignette') ?? 'Requis',
+          'capitale': 'Budapest',
+          'monnaie': 'Forint (HUF)',
+          'langue': 'Hongrois',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Italie': {
-          'capitale': prefs.getString('Italie_capitale') ?? 'Rome',
-          'monnaie': prefs.getString('Italie_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('Italie_langue') ?? 'Italien',
-          'camping': prefs.getString('Italie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Italie_vignette') ?? 'Requis',
+          'capitale': 'Rome',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Italien',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Macedoine du Nord': {
-          'capitale': prefs.getString('Macedoine_du_Nord_capitale') ?? 'Skopje',
-          'monnaie': prefs.getString('Macedoine_du_Nord_monnaie') ?? 'Denar (MKD)',
-          'langue': prefs.getString('Macedoine_du_Nord_langue') ?? 'Macedonien',
-          'camping': prefs.getString('Macedoine_du_Nord_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Macedoine_du_Nord_vignette') ?? 'Non requis',
+          'capitale': 'Skopje',
+          'monnaie': 'Denar (MKD)',
+          'langue': 'Macedonien',
+          'camping': 'Autorise',
+          'vignette': 'Non requis',
         },
         'Montenegro': {
-          'capitale': prefs.getString('Montenegro_capitale') ?? 'Podgorica',
-          'monnaie': prefs.getString('Montenegro_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('Montenegro_langue') ?? 'Montenegrin',
-          'camping': prefs.getString('Montenegro_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Montenegro_vignette') ?? 'Non requis',
+          'capitale': 'Podgorica',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Montenegrin',
+          'camping': 'Autorise',
+          'vignette': 'Non requis',
         },
         'Roumanie': {
-          'capitale': prefs.getString('Roumanie_capitale') ?? 'Bucarest',
-          'monnaie': prefs.getString('Roumanie_monnaie') ?? 'Leu (RON)',
-          'langue': prefs.getString('Roumanie_langue') ?? 'Roumain',
-          'camping': prefs.getString('Roumanie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Roumanie_vignette') ?? 'Requis',
+          'capitale': 'Bucarest',
+          'monnaie': 'Leu (RON)',
+          'langue': 'Roumain',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Slovenie': {
-          'capitale': prefs.getString('Slovenie_capitale') ?? 'Ljubljana',
-          'monnaie': prefs.getString('Slovenie_monnaie') ?? 'Euro (EUR)',
-          'langue': prefs.getString('Slovenie_langue') ?? 'Slovene',
-          'camping': prefs.getString('Slovenie_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Slovenie_vignette') ?? 'Requis',
+          'capitale': 'Ljubljana',
+          'monnaie': 'Euro (EUR)',
+          'langue': 'Slovene',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
         'Suisse': {
-          'capitale': prefs.getString('Suisse_capitale') ?? 'Berne',
-          'monnaie': prefs.getString('Suisse_monnaie') ?? 'Franc suisse (CHF)',
-          'langue': prefs.getString('Suisse_langue') ?? 'Francais, Allemand, Italien, Romanche',
-          'camping': prefs.getString('Suisse_camping') ?? 'Autorise',
-          'vignette': prefs.getString('Suisse_vignette') ?? 'Requis',
+          'capitale': 'Berne',
+          'monnaie': 'Franc suisse (CHF)',
+          'langue': 'Francais, Allemand, Italien, Romanche',
+          'camping': 'Autorise',
+          'vignette': 'Requis',
         },
       };
     });
-  }
-
-  Future<void> _updateCountryInfo(String country, String key, String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      countryInfo[country]![key] = value;
-    });
-    await prefs.setString('${country}_$key', value);
   }
 
   @override
@@ -174,10 +163,9 @@ class _PaysState extends State<Pays> {
                       countryInfo[country]!['langue']!,
                       countryInfo[country]!['camping']!,
                       countryInfo[country]!['vignette']!,
-                                        );
-                    
+                    );
                   }).toList(),
-                                  ),
+                ),
               ),
             );
           },
@@ -187,61 +175,30 @@ class _PaysState extends State<Pays> {
   }
 
   Widget _buildCountryCard(BuildContext context, String country, String flagPath, String mapPath, String capitale, String monnaie, String langue, String camping, String vignette) {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        return MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: () {
-              _showCountryDetails(context, country, flagPath, mapPath, capitale, monnaie, langue, camping, vignette);
-            },
-            child: Card(
-              elevation: 4,
-              margin: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Image.asset(flagPath, width: 24, height: 24),
-                        const SizedBox(width: 8),
-                        Text(
-                          country,
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Image.asset(mapPath, fit: BoxFit.contain),
-                  ),
-                ],
-              ),
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Image.asset(flagPath, width: 24, height: 24),
+                const SizedBox(width: 8),
+                Text(
+                  country,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ],
             ),
           ),
-        );
-      },
-    );
-  }
-
-  void _showCountryDetails(BuildContext context, String country, String flagPath, String mapPath, String capitale, String monnaie, String langue, String camping, String vignette) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CountryDialog(
-          country: country,
-          flagPath: flagPath,
-          mapPath: mapPath,
-          capitale: capitale,
-          monnaie: monnaie,
-          langue: langue,
-          camping: camping,
-          vignette: vignette,
-          onUpdate: _updateCountryInfo,
-        );
-      },
+          Expanded(
+            child: Image.asset(mapPath, fit: BoxFit.contain),
+          ),
+        ],
+      ),
     );
   }
 }

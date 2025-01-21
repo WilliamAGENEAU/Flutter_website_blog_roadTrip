@@ -4,7 +4,7 @@ import 'apropos.dart';
 import 'van.dart';
 import 'projets.dart';
 import 'pays.dart';
-import 'contact.dart';
+import 'planning.dart';
 import 'acceuil.dart';
 
 class HomePage extends StatefulWidget {
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           _buildNavigationButton(3, 'Van', Icons.directions_car),
           _buildNavigationButton(4, 'Projets', Icons.work),
           _buildNavigationButton(5, 'Pays', Icons.map),
-          _buildNavigationButton(6, 'Contact', Icons.contact_mail),
+          _buildNavigationButton(6, 'Planning', Icons.calendar_view_month),
           Switch(
             value: widget.isDarkMode,
             activeColor: Theme.of(context).colorScheme.primary,
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: screenHeight, child: const Van()),
               SizedBox(height: screenHeight, child: const Projets()),
               SizedBox(height: screenHeight, child: const Pays()),
-              SizedBox(height: screenHeight, child: const Contact()),
+              SizedBox(height: screenHeight, child: const PlanningPage()),
             ] else
               Center(child: Text('Error: Invalid screen height')),
           ],
