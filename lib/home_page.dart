@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'destinations.dart';
 import 'apropos.dart';
 import 'van.dart';
@@ -11,7 +13,8 @@ class HomePage extends StatefulWidget {
   final bool isDarkMode;
   final Function(bool) toggleTheme;
 
-  const HomePage({super.key, required this.isDarkMode, required this.toggleTheme});
+  const HomePage(
+      {super.key, required this.isDarkMode, required this.toggleTheme});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -29,9 +32,16 @@ class _HomePageState extends State<HomePage> {
 
     _scrollController.animateTo(
       index * screenHeight,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.ease,
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   @override
@@ -43,28 +53,42 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Icon(Icons.abc),
-        elevation: 2, // Ajout de l'élévation
+        title: Image.asset(
+          'images/logo.png',
+          height: 80,
+        ),
+        elevation: 2,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
+          preferredSize: const Size.fromHeight(4.0),
           child: Container(
             color: Colors.grey,
-            height: 0.3, // Ligne de séparation
+            height: 0.3,
           ),
         ),
         actions: [
-          // Actions raccourcies pour simplifier le code
           _buildNavigationButton(0, 'Accueil', Icons.home),
           _buildNavigationButton(1, 'Destinations', Icons.location_on),
           _buildNavigationButton(2, 'À propos', Icons.info),
           _buildNavigationButton(3, 'Van', Icons.directions_car),
           _buildNavigationButton(4, 'Projets', Icons.work),
           _buildNavigationButton(5, 'Pays', Icons.map),
-          _buildNavigationButton(6, 'Planning', Icons.calendar_view_month),
-          Switch(
-            value: widget.isDarkMode,
-            activeColor: Theme.of(context).colorScheme.primary,
-            onChanged: widget.toggleTheme,
+          _buildNavigationButton(6, 'Planning', Icons.calendar_month),
+          // Bouton avec image pour ouvrir le lien Polarsteps
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: InkWell(
+              onTap: () => _launchUrl(
+                  'https://www.polarsteps.com/WilliamAGENEAU/14467644-2025-eu-east'),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                onEnter: (_) => setState(() {}),
+                onExit: (_) => setState(() {}),
+                child: Image.asset(
+                  'images/polarstep.png',
+                  height: 40,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -72,7 +96,6 @@ class _HomePageState extends State<HomePage> {
         onNotification: (ScrollNotification scrollInfo) {
           if (scrollInfo is ScrollEndNotification) {
             int index = (_scrollController.offset / screenHeight).round();
-            print('Scroll ended at index: $index'); // Debug print
             setState(() {
               _selectedIndex = index;
             });
@@ -83,7 +106,10 @@ class _HomePageState extends State<HomePage> {
           controller: _scrollController,
           children: [
             if (screenHeight > 0) ...[
-              SizedBox(height: screenHeight, child: Acceuil(scrollToDestinations: () => _scrollToIndex(1))),
+              SizedBox(
+                  height: screenHeight,
+                  child:
+                      Acceuil(scrollToDestinations: () => _scrollToIndex(1))),
               SizedBox(height: screenHeight, child: const Destinations()),
               SizedBox(height: screenHeight, child: const Apropos()),
               SizedBox(height: screenHeight, child: const Van()),
@@ -91,7 +117,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: screenHeight, child: const Pays()),
               SizedBox(height: screenHeight, child: const PlanningPage()),
             ] else
-              Center(child: Text('Error: Invalid screen height')),
+              const Center(child: Text('Error: Invalid screen height')),
           ],
         ),
       ),

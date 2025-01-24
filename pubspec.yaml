@@ -41,6 +41,7 @@ dependencies:
   latlong2: ^0.9.1
   table_calendar: ^3.2.0
   intl: ^0.20.1
+  url_launcher: ^6.3.1
 
 
 dev_dependencies:
@@ -70,6 +71,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/homepage.png
+    - assets/images/william.png
+    - assets/images/sarah.png
+    - assets/images/logo.png
+    - assets/images/polarstep.png
     - assets/flags/albanie.png
     - assets/flags/allemagne.png
     - assets/flags/autriche.png
