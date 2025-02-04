@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_website_blog/widget/markers.dart';
 import 'package:latlong2/latlong.dart'; // Nécessaire pour les coordonnées GPS
 
 class Destinations extends StatefulWidget {
@@ -13,25 +14,12 @@ class _DestinationsState extends State<Destinations> {
   String? selectedLocation;
   String? selectedCountry;
   String? selectedInfo;
-
-  // Coordonnées des marqueurs
-  final List<Map<String, dynamic>> markers = [
-    {
-      'name': 'Zagreb',
-      'country': 'Croatie',
-      'info':
-          '09/04/2025 (4 nuits)\n\nZagreb, la capitale de la Croatie, est une ville dynamique qui allie charme historique et modernité. '
-              'Le quartier de la Haute Ville, avec sa cathédrale néogothique et sa place Saint-Marc, témoigne de son riche patrimoine.',
-      'lat': 45.8150,
-      'lng': 15.9819,
-    },
-    // Vous pouvez ajouter plus de marqueurs ici
-  ];
+  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFF43664E), // Fond vert
+      color: const Color(0xFF904a4a), // Fond rouge
       child: Row(
         children: [
           // Carte interactive
@@ -40,19 +28,20 @@ class _DestinationsState extends State<Destinations> {
             child: Container(
               margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.green[200],
+                color: Theme.of(context).colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: FlutterMap(
                 options: MapOptions(
                   initialCenter: LatLng(44.0, 17.0), // Centré sur les Balkans
-                  initialZoom: 5.5,
+                  initialZoom: 5.1,
                   onTap: (_, __) {
                     // Si on clique ailleurs, on réinitialise le container
                     setState(() {
                       selectedLocation = null;
                       selectedCountry = null;
                       selectedInfo = null;
+                      selectedIndex = null;
                     });
                   },
                 ),
@@ -62,28 +51,65 @@ class _DestinationsState extends State<Destinations> {
                         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                     subdomains: ['a', 'b', 'c'],
                   ),
+                  PolylineLayer(
+                    polylines: [
+                      Polyline(
+                        points: markers
+                            .map((marker) =>
+                                LatLng(marker['lat'], marker['lng']))
+                            .toList(),
+                        strokeWidth: 2.0,
+                        color: Colors.red,
+                      ),
+                    ],
+                  ),
                   MarkerLayer(
-                    markers: markers
-                        .map(
-                          (marker) => Marker(
-                            point: LatLng(marker['lat'], marker['lng']),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedLocation = marker['name'];
-                                  selectedCountry = marker['country'];
-                                  selectedInfo = marker['info'];
-                                });
-                              },
-                              child: const Icon(
-                                Icons.location_on,
-                                color: Colors.red,
-                                size: 30,
-                              ),
+                    markers: markers.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      var marker = entry.value;
+                      return Marker(
+                        point: LatLng(marker['lat'], marker['lng']),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedLocation = marker['name'];
+                              selectedCountry = marker['country'];
+                              selectedInfo = marker['info'];
+                              selectedIndex =
+                                  index + 1; // Position dans la liste
+                            });
+                          },
+                          child: MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.red,
+                                  size: 35,
+                                ),
+                                Container(
+                                  padding:
+                                      const EdgeInsets.only(top: 1, left: 5),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(1500),
+                                  ),
+                                  child: Text(
+                                    (index + 1).toString(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        )
-                        .toList(),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ],
               ),
@@ -95,7 +121,7 @@ class _DestinationsState extends State<Destinations> {
             child: Container(
               margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.green[50],
+                color: Theme.of(context).colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: selectedLocation != null
@@ -108,9 +134,11 @@ class _DestinationsState extends State<Destinations> {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                backgroundColor: Colors.green,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
                                 child: Text(
-                                  selectedLocation![0], // Première lettre
+                                  selectedIndex
+                                      .toString(), // Numéro de position
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ),

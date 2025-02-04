@@ -9,7 +9,6 @@ class Apropos extends StatelessWidget {
       height: 800,
       color: Colors.green.shade100,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
             child: PersonCard(
@@ -60,7 +59,7 @@ class _PersonCardState extends State<PersonCard>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _heightAnimation = Tween<double>(begin: 50, end: 150).animate(_controller);
+    _heightAnimation = Tween<double>(begin: 80, end: 200).animate(_controller);
   }
 
   @override
@@ -77,7 +76,10 @@ class _PersonCardState extends State<PersonCard>
       child: Column(
         children: [
           Expanded(
-            child: Image.asset(widget.imagePath, fit: BoxFit.cover),
+            child: Image.asset(
+              widget.imagePath,
+              fit: BoxFit.cover, // Assure que l'image remplit tout l'espace.
+            ),
           ),
           AnimatedBuilder(
             animation: _heightAnimation,
@@ -85,7 +87,7 @@ class _PersonCardState extends State<PersonCard>
               return Container(
                 width: double.infinity,
                 height: _heightAnimation.value,
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withOpacity(0.7),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -95,10 +97,11 @@ class _PersonCardState extends State<PersonCard>
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 20,
                         ),
                       ),
-                      if (_heightAnimation.value > 50) ...[
+                      if (_heightAnimation.value > 100) ...[
+                        // Plus de détails si la hauteur dépasse 100.
                         SizedBox(height: 10),
                         Text(
                           widget.details,
