@@ -1,73 +1,116 @@
 import 'package:flutter/material.dart';
+import 'package:gif/gif.dart';
+import 'dart:async';
+import 'package:url_launcher/url_launcher.dart';
 
-class Acceuil extends StatelessWidget {
+class Acceuil extends StatefulWidget {
   final VoidCallback scrollToDestinations;
 
   const Acceuil({super.key, required this.scrollToDestinations});
 
   @override
+  _AcceuilState createState() => _AcceuilState();
+}
+
+class _AcceuilState extends State<Acceuil> with SingleTickerProviderStateMixin {
+  late GifController _gifController;
+  late Timer _timer;
+  Duration _countdownDuration =
+      Duration(days: 34, hours: 5, minutes: 43, seconds: 2);
+
+  @override
+  void initState() {
+    super.initState();
+    _gifController = GifController(vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _gifController.repeat(
+          min: 0, max: 29, period: const Duration(seconds: 2));
+    });
+
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_countdownDuration.inSeconds > 0) {
+          _countdownDuration -= Duration(seconds: 1);
+        } else {
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _gifController.dispose();
+    _timer.cancel();
+    super.dispose();
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    return "${duration.inDays}:${twoDigits(duration.inHours % 24)}:${twoDigits(duration.inMinutes % 60)}:${twoDigits(duration.inSeconds % 60)}";
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "L'histoire d'un van, d'un rêve\net de la liberté à travers les Balkans",
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          "Entre paysages, rencontres et vie nomade, explorez notre aventure à travers une carte et des anecdotes.",
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: scrollToDestinations,
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
-                            padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 24.0)),
-                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            'Voir l\'itinéraire',
-                            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-                          ),
-                        ),
-                      ],
-                    ),
+    return Container(
+      color: const Color(0xFFffdad8), // Fond conservé
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  top: 50,
+                  child: Gif(
+                    autostart: Autostart.loop,
+                    controller: _gifController,
+                    image: AssetImage(
+                        'images/title.gif'), // Assurez-vous que le GIF est bien placé dans assets
                   ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    flex: 2,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'images/homepage.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
-        ),
+          Container(
+            width: double.infinity,
+            height: 0.3,
+            color: Colors.grey,
+          ),
+          GestureDetector(
+            onTap: () => _launchUrl(
+              'https://www.youtube.com/@williamageneauWally',
+            ),
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 25),
+                color: Colors.yellow,
+                child: Column(
+                  children: [
+                    Text(
+                      'NEXT YOUTUBE MIX PREMIERES IN ${_formatDuration(_countdownDuration)}',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

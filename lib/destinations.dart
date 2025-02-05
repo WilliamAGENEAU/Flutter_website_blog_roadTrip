@@ -19,6 +19,7 @@ class _DestinationsState extends State<Destinations> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(top: 40),
       color: const Color(0xFF904a4a), // Fond rouge
       child: Row(
         children: [

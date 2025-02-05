@@ -4,8 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'destinations.dart';
 import 'apropos.dart';
 import 'van.dart';
-import 'projets.dart';
-import 'pays.dart';
+import 'videos.dart';
 import 'planning.dart';
 import 'acceuil.dart';
 
@@ -53,29 +52,24 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'images/logo.png',
-          height: 80,
-        ),
-        elevation: 2,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0),
-          child: Container(
-            color: Colors.grey,
-            height: 0.3,
+        backgroundColor: Colors.black,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 80),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildNavigationButton(0, 'WELCOME'),
+              _buildNavigationButton(1, 'VIDEOS'),
+              _buildNavigationButton(2, 'TRIP'),
+              _buildNavigationButton(3, 'VAN'),
+              _buildNavigationButton(4, 'ABOUT US'),
+              _buildNavigationButton(5, 'PLANS'),
+            ],
           ),
         ),
         actions: [
-          _buildNavigationButton(0, 'Accueil', Icons.home),
-          _buildNavigationButton(1, 'Destinations', Icons.location_on),
-          _buildNavigationButton(2, 'À propos', Icons.info),
-          _buildNavigationButton(3, 'Van', Icons.directions_car),
-          _buildNavigationButton(4, 'Projets', Icons.work),
-          _buildNavigationButton(5, 'Pays', Icons.map),
-          _buildNavigationButton(6, 'Planning', Icons.calendar_month),
-          // Bouton avec image pour ouvrir le lien Polarsteps
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(right: 4),
             child: InkWell(
               onTap: () => _launchUrl(
                   'https://www.polarsteps.com/WilliamAGENEAU/14467644-2025-eu-east'),
@@ -85,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 onExit: (_) => setState(() {}),
                 child: Image.asset(
                   'images/polarstep.png',
-                  height: 40,
+                  height: 25,
                 ),
               ),
             ),
@@ -107,14 +101,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             if (screenHeight > 0) ...[
               SizedBox(
-                  height: screenHeight,
+                  height: screenHeight - 40,
                   child:
                       Acceuil(scrollToDestinations: () => _scrollToIndex(1))),
+              SizedBox(height: screenHeight, child: const Videos()),
               SizedBox(height: screenHeight, child: const Destinations()),
-              SizedBox(height: screenHeight, child: const Apropos()),
               SizedBox(height: screenHeight, child: const Van()),
-              SizedBox(height: screenHeight, child: const Projets()),
-              SizedBox(height: screenHeight, child: const Pays()),
+              SizedBox(height: screenHeight, child: const Apropos()),
               SizedBox(height: screenHeight, child: const PlanningPage()),
             ] else
               const Center(child: Text('Error: Invalid screen height')),
@@ -124,26 +117,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildNavigationButton(int index, String label, IconData icon) {
-    return TextButton.icon(
-      icon: Icon(
-        icon,
-        color: _selectedIndex == index
-            ? Theme.of(context).colorScheme.onPrimary
-            : Theme.of(context).colorScheme.onSurface,
-      ),
-      label: Text(
-        label,
-        style: TextStyle(
-          color: _selectedIndex == index
-              ? Theme.of(context).colorScheme.onPrimary
-              : Theme.of(context).colorScheme.onSurface,
-        ),
-      ),
+  Widget _buildNavigationButton(int index, String label) {
+    return TextButton(
       style: TextButton.styleFrom(
-        backgroundColor: _selectedIndex == index
-            ? Theme.of(context).colorScheme.primary
-            : null,
+        backgroundColor:
+            _selectedIndex == index ? Colors.black : Colors.transparent,
       ),
       onPressed: () {
         setState(() {
@@ -151,6 +129,12 @@ class _HomePageState extends State<HomePage> {
         });
         _scrollToIndex(index);
       },
+      child: Text(
+        label.toUpperCase(),
+        style: TextStyle(
+          color: _selectedIndex == index ? Colors.white : Colors.white,
+        ),
+      ),
     );
   }
 }

@@ -42,6 +42,10 @@ dependencies:
   table_calendar: ^3.2.0
   intl: ^0.20.1
   url_launcher: ^6.3.1
+  flutter_svg: ^2.0.17
+  gif: ^2.3.0
+  youtube_player_iframe: ^5.2.1
+  flutter_inappwebview: ^6.1.5
 
 
 dev_dependencies:
@@ -72,6 +76,7 @@ flutter:
   assets:
     - assets/images/homepage.png
     - assets/images/william.png
+    - assets/images/title.gif
     - assets/images/sarah.png
     - assets/images/logo.png
     - assets/images/polarstep.png
