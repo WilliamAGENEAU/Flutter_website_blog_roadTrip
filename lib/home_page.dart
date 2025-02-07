@@ -5,7 +5,7 @@ import 'destinations.dart';
 import 'apropos.dart';
 import 'van.dart';
 import 'videos.dart';
-import 'planning.dart';
+// import 'planning.dart';
 import 'acceuil.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               _buildNavigationButton(2, 'TRIP'),
               _buildNavigationButton(3, 'VAN'),
               _buildNavigationButton(4, 'ABOUT US'),
-              _buildNavigationButton(5, 'PLANS'),
+              // _buildNavigationButton(5, 'PLANS'),
             ],
           ),
         ),
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: screenHeight, child: const Destinations()),
               SizedBox(height: screenHeight, child: const Van()),
               SizedBox(height: screenHeight, child: const Apropos()),
-              SizedBox(height: screenHeight, child: const PlanningPage()),
+              // SizedBox(height: screenHeight, child: const PlanningPage()),
             ] else
               const Center(child: Text('Error: Invalid screen height')),
           ],

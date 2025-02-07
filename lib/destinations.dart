@@ -20,7 +20,7 @@ class _DestinationsState extends State<Destinations> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 40),
-      color: const Color(0xFF904a4a), // Fond rouge
+      color: Theme.of(context).colorScheme.secondary, // Fond rouge
       child: Row(
         children: [
           // Carte interactive

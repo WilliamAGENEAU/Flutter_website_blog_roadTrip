@@ -15,8 +15,7 @@ class Acceuil extends StatefulWidget {
 class _AcceuilState extends State<Acceuil> with SingleTickerProviderStateMixin {
   late GifController _gifController;
   late Timer _timer;
-  Duration _countdownDuration =
-      Duration(days: 34, hours: 5, minutes: 43, seconds: 2);
+  late Duration _countdownDuration;
 
   @override
   void initState() {
@@ -26,6 +25,10 @@ class _AcceuilState extends State<Acceuil> with SingleTickerProviderStateMixin {
       _gifController.repeat(
           min: 0, max: 29, period: const Duration(seconds: 2));
     });
+
+    final DateTime now = DateTime.now();
+    final DateTime targetDate = DateTime(2025, 3, 23, 0, 1);
+    _countdownDuration = targetDate.difference(now);
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
@@ -59,59 +62,52 @@ class _AcceuilState extends State<Acceuil> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFFffdad8), // Fond conservé
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Positioned(
-                  top: 50,
-                  child: Gif(
-                    autostart: Autostart.loop,
-                    controller: _gifController,
-                    image: AssetImage(
-                        'images/title.gif'), // Assurez-vous que le GIF est bien placé dans assets
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(
+          'images/acceuil.jpg',
+          fit: BoxFit.cover,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(),
+            ),
+            Container(
+              width: double.infinity,
+              height: 0.3,
+              color: Colors.grey,
+            ),
+            GestureDetector(
+              onTap: () => _launchUrl(
+                'https://www.youtube.com/@williamageneauWally',
+              ),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 25),
+                  color: Colors.yellow,
+                  child: Column(
+                    children: [
+                      Text(
+                        'NEXT YOUTUBE MIX PREMIERES IN ${_formatDuration(_countdownDuration)}',
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 0.3,
-            color: Colors.grey,
-          ),
-          GestureDetector(
-            onTap: () => _launchUrl(
-              'https://www.youtube.com/@williamageneauWally',
-            ),
-            child: MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 25),
-                color: Colors.yellow,
-                child: Column(
-                  children: [
-                    Text(
-                      'NEXT YOUTUBE MIX PREMIERES IN ${_formatDuration(_countdownDuration)}',
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                    ),
-                  ],
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      ],
     );
   }
 }

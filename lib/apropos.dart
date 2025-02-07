@@ -7,113 +7,46 @@ class Apropos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 800,
-      color: Colors.green.shade100,
+      color: Theme.of(context).colorScheme.surface,
       child: Row(
         children: [
           Expanded(
-            child: PersonCard(
-              imagePath: 'images/william.png',
-              name: 'William AGENEAU',
-              details: '',
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'WE ARE WALLY TRIP\n\nHi it’s William and Sarah. '
+                'In March 2025, we packed up our bags, kissed our cozy home goodbye, '
+                'and embarked on this slow living adventure we call Wally Trip. '
+                'we’re embarking on a new chapter: a 6-month road trip through the beautiful Balkans,'
+                'from March to September, in our self-converted van. \n\n'
+                'We’re two young graduates, one in computer science and the other in agronomy. '
+                'Our goal is to share our adventure through music and images of our daily life, '
+                'activities, and the amazing people we meet along the way. '
+                'Each country we visit will tell its own story,'
+                'and we can’t wait to share it all with you—moments of expression, contagious joy, and harmonious vibes.'
+                'We believe this world needs more simplicity, connection, and togetherness.',
+                style: TextStyle(fontSize: 14),
+              ),
             ),
           ),
           Expanded(
-            child: PersonCard(
-              imagePath: 'images/sarah.png',
-              name: 'Sarah DAVENEL',
-              details:
-                  'Mes études : Biologie niveau Master\nMes voyages : Italie, Irlande\nMes anecdotes : .....',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PersonCard extends StatefulWidget {
-  final String imagePath;
-  final String name;
-  final String details;
-
-  const PersonCard({
-    required this.imagePath,
-    required this.name,
-    required this.details,
-    super.key,
-  });
-
-  @override
-  _PersonCardState createState() => _PersonCardState();
-}
-
-class _PersonCardState extends State<PersonCard>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _heightAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _heightAnimation = Tween<double>(begin: 80, end: 200).animate(_controller);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => _controller.forward(),
-      onExit: (_) => _controller.reverse(),
-      child: Column(
-        children: [
-          Expanded(
-            child: Image.asset(
-              widget.imagePath,
-              fit: BoxFit.cover, // Assure que l'image remplit tout l'espace.
-            ),
-          ),
-          AnimatedBuilder(
-            animation: _heightAnimation,
-            builder: (context, child) {
-              return Container(
-                width: double.infinity,
-                height: _heightAnimation.value,
-                color: Colors.black.withOpacity(0.7),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.name,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      if (_heightAnimation.value > 100) ...[
-                        // Plus de détails si la hauteur dépasse 100.
-                        SizedBox(height: 10),
-                        Text(
-                          widget.details,
-                          style: TextStyle(color: Colors.white),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ],
-                  ),
+            flex: 1,
+            child: Container(
+              margin: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(350.0),
+                  topRight: Radius.circular(350.0),
                 ),
-              );
-            },
+                image: DecorationImage(
+                  image: AssetImage(
+                      'images/about1.jpg'), // Remplacez avec le chemin de votre image
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
         ],
       ),
